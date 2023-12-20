@@ -1,0 +1,86 @@
+-- Es 1, Gaydou Massimo Thomas
+-- Crea tabella aereoporto 
+create table AEREOPORTO (
+  citta CHAR(255),
+  nazione CHAR(255),
+  numPiste INT,
+  primary key (citta)
+);
+-- Crea tabella volo
+create table VOLO (
+    idVolo CHAR(255),
+    giornoSett date,
+    cittaPart CHAR(255),
+    oraPart time,
+    cittaArr CHAR(255),
+    oraArr time,
+    tipoAereo Text,
+    primary key (idVolo)
+);
+-- Crea tabella aereo 
+create table AEREO ( 
+    TipoAereo CHAR(255),
+    NumPasseggeri int,
+    QtaMerci int,
+    primary key (tipoAereo)
+);
+-- inserisco i dati nelle tabelle
+INSERT INTO AEREOPORTO (citta, nazione, numPiste)
+VALUES 
+  ('Roma', 'Italia', '6'),
+  ('New York', 'USA', '10'),
+  ('Parigi', 'Francia', '20'),
+  ('Tokyo', 'Giappone', '40'),
+  ('Sydney', 'Australia', '8'),
+  ('Pechino', 'Cina', '14'),
+  ('Londra', 'Regno Unito', '7'),
+  ('Berlino', 'Germania', '20'),
+  ('Cairo', 'Egitto', '5'),
+  ('Città del Messico', 'Messico', '0');
+--
+insert into AEREO (tipoAereo, NumPasseggeri, QtaMerci)
+ values
+  ('Boeing 737', 150, 5000),
+  ('Airbus A320', 180, 4000),
+  ('Boeing 777', 300, 10000),
+  ('Embraer E190', 100, 2000),
+  ('Airbus A380', 550, 20000),
+  ('Boeing 747', 450, 15000),
+  ('Bombardier CRJ-700', 70, 1000),
+  ('Cessna 172', 4, 200),
+  ('Airbus A330', 250, 8000),
+  ('Boeing 757', 200, 6000);
+--
+INSERT INTO VOLO (idVolo, giornoSett, cittaPart, oraPart, cittaArr, oraArr, tipoAereo)
+VALUES 
+  ('AD274', '2023-12-21', 'Roma', '08:00:00', 'Bologna', '09:30:00', 'Boeing 737'),
+  ('V2', '2023-12-21', 'Torino', '10:00:00', 'Parigi', '12:30:00', 'Airbus A320'),
+  ('V3', '2023-12-21', 'New York', '14:00:00', 'Bologna', '17:30:00', 'Boeing 777'),
+  ('V4', '2023-12-22', 'Londra', '12:00:00', 'Bologna', '14:30:00', 'Embraer E190'),
+  ('AZ904', '2023-12-22', 'Tokyo', '18:00:00', 'Torino', '21:30:00', 'Airbus A380'),
+  ('V6', '2023-12-22', 'Torino', '08:00:00', 'Berlino', '10:30:00', 'Boeing 747'),
+  ('V7', '2023-12-23', 'Sydney', '14:00:00', 'Bologna', '17:30:00', 'Bombardier CRJ-700'),
+  ('AB841', '2023-12-23', 'Pechino', '10:00:00', 'Milano', '12:30:00', 'Cessna 172'),
+  ('V9', '2023-12-23', 'Cairo', '12:00:00', 'Bologna', '14:30:00', 'Airbus A330'),
+  ('V10', '2023-12-24', 'Città del Messico', '16:00:00', 'Bologna', '19:30:00', 'Boeing 757'),
+  ('AZ240', '2023-12-22', 'Torino', '17:30:00', 'Barcellona', '19:30:00', 'Embraer E190'),
+  ('V12', '2023-12-23', 'Torino', '20:00:00', 'New York', '23:30:00', 'Airbus A380'),
+  ('V13', '2023-12-23', 'Torino', '09:00:00', 'Roma', '10:30:00', 'Boeing 747'),
+  ('V14', '2023-12-24', 'Torino', '12:30:00', 'Parigi', '14:30:00', 'Bombardier CRJ-700'),
+  ('V15', '2023-12-24', 'Torino', '15:00:00', 'Londra', '17:30:00', 'Cessna 172'),
+  ('V16', '2023-12-25', 'Torino', '18:00:00', 'Berlino', '20:30:00', 'Airbus A330');
+--
+INSERT INTO VOLO (idVolo, giornoSett, cittaPart, oraPart, cittaArr, oraArr, tipoAereo)
+VALUES 
+  ('AZ274', '2023-12-25', 'Roma', '09:00:00', 'New York', '15:30:00', 'Boeing 777');
+--
+    -- Le città con un aeroporto di cui non è noto il numero di piste;
+select * from AEREOPORTO where numPiste = Null; 
+-- I tipi di aereo usati nei voli che partono da Torino
+select distinct tipoAereo from VOLO where cittaPart = 'Torino';
+-- Le città da cui partono voli diretti a Bologna
+SELECT DISTINCT cittaPart from VOLO WHERE cittaArr = 'Bologna';
+-- Le città da cui parte e arriva il volo con codice AZ274;
+select distinct cittaPart from VOLO where idVolo = 'AZ274';
+
+
